@@ -16,13 +16,17 @@ public class ConexaoLivros {
     Connection ConexaoLivros;
 
     public ConexaoLivros() throws SQLException {
-        this.servidor = "localhost";
-        this.banco = "biblioteca";
-        this.url = "jdbc:mysql://" + servidor + "/" + banco;
-        this.usuario = "root";
-        this.senha = "";
-        this.tabela = "livros";
-        
-        ConexaoLivros = (Connection) DriverManager.getConnection(url, usuario, senha);
+        try{
+            this.servidor = "localhost";
+            this.banco = "biblioteca";
+            this.url = "jdbc:mysql://" + servidor + ":3306/" + banco;
+            this.usuario = "root";
+            this.senha = "";
+            this.tabela = "livros";
+
+            ConexaoLivros = (Connection) DriverManager.getConnection(url, usuario, senha);
+        }catch(SQLException sqle){
+            System.out.println(sqle.getMessage());
+        }    
     }
 }
