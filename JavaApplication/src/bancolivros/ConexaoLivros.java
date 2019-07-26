@@ -9,6 +9,7 @@ public class ConexaoLivros {
     protected String servidor;
     protected String banco;
     protected String url;
+    protected String porta;
     protected String usuario;
     protected String senha;
     protected String tabela;
@@ -16,17 +17,15 @@ public class ConexaoLivros {
     Connection ConexaoLivros;
 
     public ConexaoLivros() throws SQLException {
-        try{
-            this.servidor = "localhost";
-            this.banco = "biblioteca";
-            this.url = "jdbc:mysql://" + servidor + ":3306/" + banco;
-            this.usuario = "root";
-            this.senha = "";
-            this.tabela = "livros";
+        this.servidor = "localhost";
+        this.porta = "3307";
+        this.banco = "biblioteca";
+        this.url = "jdbc:mysql://" + servidor + ":"+porta+"/" + banco;
+        this.usuario = "root";
+        this.senha = "";
+        this.tabela = "livros";
 
-            ConexaoLivros = (Connection) DriverManager.getConnection(url, usuario, senha);
-        }catch(SQLException sqle){
-            System.out.println(sqle.getMessage());
-        }    
+        ConexaoLivros = (Connection)DriverManager.getConnection(url, usuario, senha);
+        
     }
 }

@@ -1,37 +1,28 @@
 package bancolivros;
 
 import com.mysql.jdbc.Connection;
-import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
 
 public class CRUDLivros extends ConexaoLivros {
-    private int id;
     private String titulo;
     private String autor;
     private String genero;
     private String editora;
-    private int edicao;
-    private Date dataLancamento;
+    private String dataLancamento;
     private Connection conn;
 
     public CRUDLivros() throws SQLException {
-        ConexaoLivros cl = new ConexaoLivros();
         
-        this.setConexaoLivros(cl);
     }
 
     // Setters
     public void setConexaoLivros(ConexaoLivros cl) {
         this.conn = cl.ConexaoLivros;
     }
-    
-    public void setId(int id) {
-        this.id = id;
-    }
-    
+        
     public void setTitulo(String titulo) {
         this.titulo = titulo;
     }
@@ -67,25 +58,17 @@ public class CRUDLivros extends ConexaoLivros {
     public void setTabela(String tabela) {
         this.tabela = tabela;
     }
-    
-    public void setEdicao(String edicao){
-        this.edicao = Integer.parseInt(edicao);
-    }
-    
+        
     public void setEditora(String editora){
         this.editora = editora;
     }
     
     public void setDataLancamento(String dataLancamento){
-        this.dataLancamento = Date.valueOf(dataLancamento);
+        this.dataLancamento = dataLancamento;
     }
     
     
     // Geters
-    public int getId() {
-        return id;
-    }
-    
     public String getTitulo() {
         return titulo;
     }
@@ -126,15 +109,11 @@ public class CRUDLivros extends ConexaoLivros {
         return conn;
     }    
     
-    public int getEdicao(){
-        return edicao;
-    }
-    
     public String getEditora(){
         return editora;
     }
     
-    public Date getDataLancamento(){
+    public String getDataLancamento(){
         return dataLancamento;
     }
     
@@ -149,49 +128,47 @@ public class CRUDLivros extends ConexaoLivros {
 
         ResultSet rs = stmt.getResultSet();
         while(rs.next()){
-            this.setId(rs.getInt("id"));
             this.setTitulo(rs.getString("titulo"));
             this.setAutor(rs.getString("autor"));
             this.setGenero(rs.getString("genero"));
-           
             stmt.execute();
             stmt.close();
        }
     }
     
+    /*public List<Registros> listar() throws SQLException {
+        CRUDLivros crud = new CRUDLivros();
+        String sql = "SELECT * FROM "+ this.getTabela()+"";
+        PreparedStatement stmt = crud.ConexaoLivros.prepareStatement(sql);
+        stmt.execute();
+        stmt.close();
+        ResultSet rs = stmt.getResultSet();
+        return rs;
+    }*/
     
     //cadastrar dados
-    public void cadastrar(String titulo,String autor, String genero, String dataLancamento, String editora, String edicao) throws SQLException{
+    public void cadastrar(String titulo,String autor, String genero, String dataLancamento, String editora) throws SQLException{
         this.setTabela("livros");
         this.setTitulo(titulo);
         this.setAutor(autor);
         this.setGenero(genero);
-        this.setEdicao(edicao);
         this.setEditora(editora);
         this.setDataLancamento(dataLancamento);
-        //CRUDLivros crud = new CRUDLivros();
         
-        String sql = "INSERT INTO " + this.getTabela() + " (titulo,autor,genero,editora,edicao,dataLancamento) " + " VALUES(?,?,?,?,?,?) ";
+        //System.out.println(this.edicao);
+        CRUDLivros crud = new CRUDLivros();
         
-        try (PreparedStatement stmt = this.conn.prepareStatement(sql)) {
+        String sql = "INSERT INTO " + this.getTabela() + " (titulo,autor,genero,editora,dataLancamento) " + " VALUES(?,?,?,?,?) ";
+        
+        try (PreparedStatement stmt = crud.ConexaoLivros.prepareStatement(sql)) {
             stmt.setString(1,this.getTitulo());
             stmt.setString(2,this.getAutor());
             stmt.setString(3,this.getGenero());            
             stmt.setString(4,this.getEditora());
-            stmt.setInt(5,this.getEdicao());
-            stmt.setDate(6,this.getDataLancamento());
+            stmt.setString(5,this.getDataLancamento());            
             stmt.execute();
             stmt.close();
         }
     }
-    
-    //excluir dados
-    public void excluir(int id) throws SQLException {
-       CRUDLivros crud = new CRUDLivros();
-       String sql = "DELETE FROM "+ this.tabela+" WHERE idContato = ?";
-       PreparedStatement stmt = crud.ConexaoLivros.prepareStatement(sql);
-       stmt.setInt(1,id);
-       stmt.execute();
-       stmt.close();
-    }    
+     
 }

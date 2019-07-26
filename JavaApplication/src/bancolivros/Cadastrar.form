@@ -29,7 +29,6 @@
                   <Component id="btnCadastrar" min="-2" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
-                      <Component id="jLabel6" min="-2" max="-2" attributes="0"/>
                       <Component id="jLabel5" min="-2" max="-2" attributes="0"/>
                       <Group type="103" alignment="0" groupAlignment="1" attributes="0">
                           <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
@@ -45,7 +44,6 @@
                   <Component id="txtAutor" alignment="0" min="-2" pref="222" max="-2" attributes="0"/>
                   <Component id="txtDataLancamento" min="-2" pref="222" max="-2" attributes="0"/>
                   <Component id="txtEditora" min="-2" pref="222" max="-2" attributes="0"/>
-                  <Component id="txtEdicao" min="-2" pref="222" max="-2" attributes="0"/>
               </Group>
               <EmptySpace pref="234" max="32767" attributes="0"/>
           </Group>
@@ -79,12 +77,7 @@
                   <Component id="jLabel5" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="txtEditora" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace type="unrelated" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="jLabel6" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="txtEdicao" alignment="3" min="-2" max="-2" attributes="0"/>
-              </Group>
-              <EmptySpace min="-2" pref="42" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="73" max="-2" attributes="0"/>
               <Component id="btnCadastrar" min="-2" max="-2" attributes="0"/>
               <EmptySpace min="-2" pref="35" max="-2" attributes="0"/>
           </Group>
@@ -117,11 +110,6 @@
         <Property name="text" type="java.lang.String" value="Editora:"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JLabel" name="jLabel6">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="Edi&#xe7;&#xe3;o:"/>
-      </Properties>
-    </Component>
     <Component class="javax.swing.JTextField" name="txtTitulo">
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtTituloActionPerformed"/>
@@ -145,11 +133,6 @@
     <Component class="javax.swing.JTextField" name="txtEditora">
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtEditoraActionPerformed"/>
-      </Events>
-    </Component>
-    <Component class="javax.swing.JTextField" name="txtEdicao">
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtEdicaoActionPerformed"/>
       </Events>
     </Component>
     <Component class="javax.swing.JButton" name="btnCadastrar">

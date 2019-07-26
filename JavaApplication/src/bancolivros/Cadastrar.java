@@ -32,13 +32,11 @@ public class Cadastrar extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
-        jLabel6 = new javax.swing.JLabel();
         txtTitulo = new javax.swing.JTextField();
         txtGenero = new javax.swing.JTextField();
         txtAutor = new javax.swing.JTextField();
         txtDataLancamento = new javax.swing.JTextField();
         txtEditora = new javax.swing.JTextField();
-        txtEdicao = new javax.swing.JTextField();
         btnCadastrar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -52,8 +50,6 @@ public class Cadastrar extends javax.swing.JFrame {
         jLabel4.setText("Data Lançamento:");
 
         jLabel5.setText("Editora:");
-
-        jLabel6.setText("Edição:");
 
         txtTitulo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -85,12 +81,6 @@ public class Cadastrar extends javax.swing.JFrame {
             }
         });
 
-        txtEdicao.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtEdicaoActionPerformed(evt);
-            }
-        });
-
         btnCadastrar.setText("Cadastrar");
         btnCadastrar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -108,7 +98,6 @@ public class Cadastrar extends javax.swing.JFrame {
                     .addComponent(btnCadastrar)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addComponent(jLabel1)
-                        .addComponent(jLabel6)
                         .addComponent(jLabel5)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(jLabel2)
@@ -120,8 +109,7 @@ public class Cadastrar extends javax.swing.JFrame {
                     .addComponent(txtGenero, javax.swing.GroupLayout.PREFERRED_SIZE, 222, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtAutor, javax.swing.GroupLayout.PREFERRED_SIZE, 222, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtDataLancamento, javax.swing.GroupLayout.PREFERRED_SIZE, 222, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtEditora, javax.swing.GroupLayout.PREFERRED_SIZE, 222, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtEdicao, javax.swing.GroupLayout.PREFERRED_SIZE, 222, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtEditora, javax.swing.GroupLayout.PREFERRED_SIZE, 222, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(234, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -134,7 +122,7 @@ public class Cadastrar extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jLabel2)
-                    .addComponent(txtGenero, javax.swing.GroupLayout.PREFERRED_SIZE, 22, Short.MAX_VALUE))
+                    .addComponent(txtGenero, javax.swing.GroupLayout.DEFAULT_SIZE, 22, Short.MAX_VALUE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -147,11 +135,7 @@ public class Cadastrar extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
                     .addComponent(txtEditora, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel6)
-                    .addComponent(txtEdicao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(42, 42, 42)
+                .addGap(73, 73, 73)
                 .addComponent(btnCadastrar)
                 .addGap(35, 35, 35))
         );
@@ -167,10 +151,6 @@ public class Cadastrar extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtAutorActionPerformed
 
-    private void txtDataLancamentoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtDataLancamentoActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtDataLancamentoActionPerformed
-
     private void txtTituloActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtTituloActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtTituloActionPerformed
@@ -179,21 +159,21 @@ public class Cadastrar extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtEditoraActionPerformed
 
-    private void txtEdicaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtEdicaoActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtEdicaoActionPerformed
-
     private void btnCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadastrarActionPerformed
         
         try{
             CRUDLivros crud = new CRUDLivros();
         
-            crud.cadastrar(txtTitulo.getText(), txtAutor.getText(), txtGenero.getText(), txtDataLancamento.getText(), txtEditora.getText(), txtEdicao.getText());
+            crud.cadastrar(txtTitulo.getText(), txtAutor.getText(), txtGenero.getText(), txtDataLancamento.getText(), txtEditora.getText());
         }catch(Exception e){
             System.out.println(e.getMessage());
         }
        
     }//GEN-LAST:event_btnCadastrarActionPerformed
+
+    private void txtDataLancamentoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtDataLancamentoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtDataLancamentoActionPerformed
 
     /**
      * @param args the command line arguments
@@ -237,10 +217,8 @@ public class Cadastrar extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
     private javax.swing.JTextField txtAutor;
     private javax.swing.JTextField txtDataLancamento;
-    private javax.swing.JTextField txtEdicao;
     private javax.swing.JTextField txtEditora;
     private javax.swing.JTextField txtGenero;
     private javax.swing.JTextField txtTitulo;
