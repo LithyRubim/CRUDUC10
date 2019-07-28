@@ -4,25 +4,27 @@ import com.mysql.jdbc.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import javax.swing.JOptionPane;
 
 
 public class Livros extends ConexaoLivros {
+    private int id;
     private String titulo;
     private String autor;
     private String genero;
     private String editora;
     private String dataLancamento;
-    private Connection conn;
+    private String edicao;
 
     public Livros() throws SQLException {
         
     }
 
-    // Setters
-    public void setConexaoLivros(ConexaoLivros cl) {
-        this.conn = cl.ConexaoLivros;
+    // Setters        
+    public void setId(Integer id){
+        this.id = id;
     }
-        
+    
     public void setTitulo(String titulo) {
         this.titulo = titulo;
     }
@@ -67,8 +69,16 @@ public class Livros extends ConexaoLivros {
         this.dataLancamento = dataLancamento;
     }
     
+    public void setEdicao(String edicao){
+        this.edicao = edicao;
+    }
+    
     
     // Geters
+    public Integer getId(){
+        return id;
+    }
+    
     public String getTitulo() {
         return titulo;
     }
@@ -105,10 +115,6 @@ public class Livros extends ConexaoLivros {
         return tabela;
     }
     
-    public Connection getConexaoLivros() {
-        return conn;
-    }    
-    
     public String getEditora(){
         return editora;
     }
@@ -117,11 +123,15 @@ public class Livros extends ConexaoLivros {
         return dataLancamento;
     }
     
+    public String getEdicao(){
+        return edicao;
+    }
+    
     //pesquisa
     public void pesquisa(String txt) throws SQLException {
         Livros crud = new Livros();
         String sql = "SELECT * FROM "+ this.tabela+" WHERE titulo LIKE ?";
-        PreparedStatement stmt = this.conn.prepareStatement(sql);
+        PreparedStatement stmt = crud.ConexaoLivros.prepareStatement(sql);
         stmt.setString(1,"%" + txt + "%");
         stmt.execute();
         stmt.close();
@@ -136,17 +146,50 @@ public class Livros extends ConexaoLivros {
        }
     }
     
-    /*public listar() throws SQLException {
+    public ResultSet listar(String pesquisa) throws SQLException {
         Livros crud = new Livros();
         String sql = "SELECT * FROM "+ this.getTabela()+"";
-        PreparedStatement stmt = crud.ConexaoLivros.prepareStatement(sql);
-        stmt.execute();
-        stmt.close();
-        ResultSet rs = stmt.getResultSet();
-    }*/
+        if(!pesquisa.equals("")){
+            sql += " WHERE titulo='%"+pesquisa+"%';";
+        }
+        try (PreparedStatement stmt = crud.ConexaoLivros.prepareStatement(sql)) {
+            stmt.execute();
+            stmt.close();
+            ResultSet rs = stmt.getResultSet();
+            return rs;
+        }
+    }
+    
+    public void editar(Integer id, String titulo,String autor, String genero, String dataLancamento, String editora, String edicao) throws SQLException{
+        this.setTabela("livros");
+        this.setId(id);
+        this.setTitulo(titulo);
+        this.setAutor(autor);
+        this.setGenero(genero);
+        this.setEditora(editora);
+        this.setDataLancamento(dataLancamento);
+        
+        Livros crud = new Livros();
+        
+        String sql = "UPDATE " + this.getTabela() + " SET titulo=?,autor=?,genero=?,editora=?,dataLancamento=?,edicao=? WHERE id=?";
+        
+        try (PreparedStatement stmt = crud.ConexaoLivros.prepareStatement(sql)) {
+            stmt.setString(1,this.getTitulo());
+            stmt.setString(2,this.getAutor());
+            stmt.setString(3,this.getGenero());
+            stmt.setString(4,this.getEditora());
+            stmt.setString(5,this.getDataLancamento());
+            stmt.setInt(6,Integer.parseInt(this.getEdicao()));
+            stmt.setInt(7,this.getId());
+            stmt.execute();
+            stmt.close();
+            
+            JOptionPane.showMessageDialog(null, "Cadastro realizado com sucesso");
+        }
+    }
     
     //cadastrar dados
-    public void cadastrar(String titulo,String autor, String genero, String dataLancamento, String editora) throws SQLException{
+    public void cadastrar(String titulo,String autor, String genero, String dataLancamento, String editora, String edicao) throws SQLException{
         this.setTabela("livros");
         this.setTitulo(titulo);
         this.setAutor(autor);
@@ -154,19 +197,21 @@ public class Livros extends ConexaoLivros {
         this.setEditora(editora);
         this.setDataLancamento(dataLancamento);
         
-        //System.out.println(this.edicao);
         Livros crud = new Livros();
         
-        String sql = "INSERT INTO " + this.getTabela() + " (titulo,autor,genero,editora,dataLancamento) " + " VALUES(?,?,?,?,?) ";
+        String sql = "INSERT INTO " + this.getTabela() + " (titulo,autor,genero,editora,dataLancamento,edicao) " + " VALUES(?,?,?,?,?,?) ";
         
         try (PreparedStatement stmt = crud.ConexaoLivros.prepareStatement(sql)) {
             stmt.setString(1,this.getTitulo());
             stmt.setString(2,this.getAutor());
-            stmt.setString(3,this.getGenero());            
+            stmt.setString(3,this.getGenero());
             stmt.setString(4,this.getEditora());
-            stmt.setString(5,this.getDataLancamento());            
+            stmt.setString(5,this.getDataLancamento());
+            stmt.setInt(6,Integer.parseInt(this.getEdicao()));
             stmt.execute();
             stmt.close();
+            
+            JOptionPane.showMessageDialog(null, "Cadastro realizado com sucesso");
         }
     }
      

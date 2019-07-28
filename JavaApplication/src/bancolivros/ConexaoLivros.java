@@ -22,7 +22,7 @@ public class ConexaoLivros {
         this.banco = "biblioteca";
         this.url = "jdbc:mysql://" + servidor + ":"+porta+"/" + banco;
         this.usuario = "root";
-        this.senha = "";
+        this.senha = "root";
         this.tabela = "livros";
 
         ConexaoLivros = (Connection)DriverManager.getConnection(url, usuario, senha);

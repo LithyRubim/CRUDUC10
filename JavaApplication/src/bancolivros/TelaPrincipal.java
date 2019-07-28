@@ -5,6 +5,8 @@
  */
 package bancolivros;
 
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author Lithy
@@ -27,17 +29,22 @@ public class TelaPrincipal extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jButton1 = new javax.swing.JButton();
+        btnListar = new javax.swing.JButton();
         btnFormCadastro = new javax.swing.JButton();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        tbListagem = new javax.swing.JTable();
+        lblTitulo = new javax.swing.JLabel();
+        jMenuBar1 = new javax.swing.JMenuBar();
+        jmMenu1 = new javax.swing.JMenu();
+        jmiSobre = new javax.swing.JMenuItem();
+        jmiSair = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jButton1.setText("Pesquisar");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        btnListar.setText("Listar");
+        btnListar.setMaximumSize(new java.awt.Dimension(87, 32));
+        btnListar.setMinimumSize(new java.awt.Dimension(87, 32));
+        btnListar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                btnListarActionPerformed(evt);
             }
         });
 
@@ -48,63 +55,81 @@ public class TelaPrincipal extends javax.swing.JFrame {
             }
         });
 
-        tbListagem.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
+        lblTitulo.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
+        lblTitulo.setText("Biblioteca Virtual");
 
-            },
-            new String [] {
-                "Titulo", "Autor", "Genero", "Lançamento", "Editora"
-            }
-        ));
-        tbListagem.addComponentListener(new java.awt.event.ComponentAdapter() {
-            public void componentShown(java.awt.event.ComponentEvent evt) {
-                tbListagemComponentShown(evt);
+        jmMenu1.setText("Arquivo");
+
+        jmiSobre.setText("Sobre");
+        jmiSobre.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jmiSobreActionPerformed(evt);
             }
         });
-        jScrollPane1.setViewportView(tbListagem);
+        jmMenu1.add(jmiSobre);
+
+        jmiSair.setText("Sair");
+        jmiSair.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jmiSairActionPerformed(evt);
+            }
+        });
+        jmMenu1.add(jmiSair);
+
+        jMenuBar1.add(jmMenu1);
+
+        setJMenuBar(jMenuBar1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 356, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addContainerGap(103, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jButton1)
-                    .addComponent(btnFormCadastro))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(btnFormCadastro, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(101, 101, 101)
+                        .addComponent(btnListar, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(84, 84, 84))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(lblTitulo)
+                        .addGap(129, 129, 129))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 289, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(46, 46, 46)
-                        .addComponent(jButton1)
-                        .addGap(18, 18, 18)
-                        .addComponent(btnFormCadastro)))
-                .addContainerGap(24, Short.MAX_VALUE))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(32, 32, 32)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnFormCadastro)
+                    .addComponent(btnListar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(80, 80, 80)
+                .addComponent(lblTitulo)
+                .addContainerGap(120, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
+    private void btnListarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnListarActionPerformed
+        new Listar().setVisible(true);
+    }//GEN-LAST:event_btnListarActionPerformed
 
     private void btnFormCadastroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFormCadastroActionPerformed
         new Cadastrar().setVisible(true);
     }//GEN-LAST:event_btnFormCadastroActionPerformed
 
-    private void tbListagemComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_tbListagemComponentShown
-        
-    }//GEN-LAST:event_tbListagemComponentShown
+    private void jmiSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiSairActionPerformed
+        this.dispose();
+    }//GEN-LAST:event_jmiSairActionPerformed
+
+    private void jmiSobreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiSobreActionPerformed
+        JOptionPane.showMessageDialog(null, 
+              "Programa de CRUD \n"
+               + "TÉCNICO EM INFORMÁTICA \n"
+               + " SENAC - 2019", 
+              "Sobre o CRUD", JOptionPane.PLAIN_MESSAGE); 
+    }//GEN-LAST:event_jmiSobreActionPerformed
 
     /**
      * @param args the command line arguments
@@ -143,8 +168,11 @@ public class TelaPrincipal extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnFormCadastro;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable tbListagem;
+    private javax.swing.JButton btnListar;
+    private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JMenu jmMenu1;
+    private javax.swing.JMenuItem jmiSair;
+    private javax.swing.JMenuItem jmiSobre;
+    private javax.swing.JLabel lblTitulo;
     // End of variables declaration//GEN-END:variables
 }
