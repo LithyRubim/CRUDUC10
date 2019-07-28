@@ -162,7 +162,7 @@ public class Cadastrar extends javax.swing.JFrame {
     private void btnCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadastrarActionPerformed
         
         try{
-            CRUDLivros crud = new CRUDLivros();
+            Livros crud = new Livros();
         
             crud.cadastrar(txtTitulo.getText(), txtAutor.getText(), txtGenero.getText(), txtDataLancamento.getText(), txtEditora.getText());
         }catch(Exception e){

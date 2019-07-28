@@ -6,7 +6,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 
-public class CRUDLivros extends ConexaoLivros {
+public class Livros extends ConexaoLivros {
     private String titulo;
     private String autor;
     private String genero;
@@ -14,7 +14,7 @@ public class CRUDLivros extends ConexaoLivros {
     private String dataLancamento;
     private Connection conn;
 
-    public CRUDLivros() throws SQLException {
+    public Livros() throws SQLException {
         
     }
 
@@ -119,7 +119,7 @@ public class CRUDLivros extends ConexaoLivros {
     
     //pesquisa
     public void pesquisa(String txt) throws SQLException {
-        CRUDLivros crud = new CRUDLivros();
+        Livros crud = new Livros();
         String sql = "SELECT * FROM "+ this.tabela+" WHERE titulo LIKE ?";
         PreparedStatement stmt = this.conn.prepareStatement(sql);
         stmt.setString(1,"%" + txt + "%");
@@ -136,14 +136,13 @@ public class CRUDLivros extends ConexaoLivros {
        }
     }
     
-    /*public List<Registros> listar() throws SQLException {
-        CRUDLivros crud = new CRUDLivros();
+    /*public listar() throws SQLException {
+        Livros crud = new Livros();
         String sql = "SELECT * FROM "+ this.getTabela()+"";
         PreparedStatement stmt = crud.ConexaoLivros.prepareStatement(sql);
         stmt.execute();
         stmt.close();
         ResultSet rs = stmt.getResultSet();
-        return rs;
     }*/
     
     //cadastrar dados
@@ -156,7 +155,7 @@ public class CRUDLivros extends ConexaoLivros {
         this.setDataLancamento(dataLancamento);
         
         //System.out.println(this.edicao);
-        CRUDLivros crud = new CRUDLivros();
+        Livros crud = new Livros();
         
         String sql = "INSERT INTO " + this.getTabela() + " (titulo,autor,genero,editora,dataLancamento) " + " VALUES(?,?,?,?,?) ";
         
