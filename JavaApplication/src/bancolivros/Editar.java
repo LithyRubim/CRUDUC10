@@ -23,12 +23,12 @@ public class Editar extends javax.swing.JFrame {
         
     }
     
-    public void setValorCampos(){
+    public void setValorCampos(int idLivro){
         this.setVisible(true);
         try{
             Livros crud = new Livros();
             
-            String sql = "SELECT * FROM "+ crud.getTabela()+"";
+            String sql = "SELECT * FROM "+ crud.getTabela()+" WHERE id="+idLivro;
            
             try (PreparedStatement stmt = crud.ConexaoLivros.prepareStatement(sql)) {
                 stmt.execute();

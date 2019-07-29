@@ -201,7 +201,8 @@ public class Listar extends javax.swing.JFrame {
     }//GEN-LAST:event_btnVoltarActionPerformed
 
     private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarActionPerformed
-        new Editar().setValorCampos();
+        int idLivro = Integer.parseInt(tbListagem.getValueAt(tbListagem.getSelectedRow(), 0).toString());
+        new Editar().setValorCampos(idLivro);
         this.dispose();
     }//GEN-LAST:event_btnEditarActionPerformed
 
