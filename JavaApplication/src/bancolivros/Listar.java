@@ -5,8 +5,11 @@
  */
 package bancolivros;
 
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.HashSet;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -22,16 +25,38 @@ public class Listar extends javax.swing.JFrame {
         try{
             Livros crud = new Livros();
 
-            ResultSet rs = crud.listar("");
-
-            while(rs.next()){
-                /*tbListagem.*/
-                rs.getString("titulo");
-                rs.getString("autor");
-                rs.getString("genero");
-                /*stmt.execute();
-                stmt.close();*/
-           }
+            javax.swing.table.DefaultTableModel tbModel = (DefaultTableModel)tbListagem.getModel();
+            
+            String sql = "SELECT * FROM "+ crud.getTabela()+"";
+           
+            try (PreparedStatement stmt = crud.ConexaoLivros.prepareStatement(sql)) {
+                stmt.execute();
+                
+                ResultSet rs = stmt.getResultSet();
+                //System.out.println(rs);
+            
+                while(rs.next()){
+                    crud.setId(Integer.parseInt(rs.getString("id")));
+                    crud.setTitulo(rs.getString("titulo"));
+                    crud.setAutor(rs.getString("autor"));
+                    crud.setGenero(rs.getString("genero"));
+                    crud.setDataLancamento(rs.getString("dataLancamento"));
+                    crud.setEditora(rs.getString("editora"));
+                    crud.setEdicao(rs.getString("edicao"));
+                    
+                    
+                    tbModel.addRow(new Object[]{crud.getId(),crud.getTitulo(),crud.getAutor(),crud.getGenero(),crud.getDataLancamento(),crud.getEditora(),crud.getEdicao()});
+                    /*rs.getString("titulo");
+                    rs.getString("autor");
+                    rs.getString("genero");
+                    /*stmt.execute();
+                    stmt.close();*/
+                }
+                
+                stmt.close();
+            }
+            
+            
         }catch(Exception e){
             System.out.println(e.getMessage());
         }
@@ -71,11 +96,11 @@ public class Listar extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Titulo", "Autor", "Gênero", "Dt. Lançamento", "Editora", "Edição"
+                "ID", "Titulo", "Autor", "Gênero", "Dt. Lançamento", "Editora", "Edição"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false
+                false, false, false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -83,14 +108,6 @@ public class Listar extends javax.swing.JFrame {
             }
         });
         jScrollPane1.setViewportView(tbListagem);
-        if (tbListagem.getColumnModel().getColumnCount() > 0) {
-            tbListagem.getColumnModel().getColumn(0).setResizable(false);
-            tbListagem.getColumnModel().getColumn(1).setResizable(false);
-            tbListagem.getColumnModel().getColumn(2).setResizable(false);
-            tbListagem.getColumnModel().getColumn(3).setResizable(false);
-            tbListagem.getColumnModel().getColumn(4).setResizable(false);
-            tbListagem.getColumnModel().getColumn(5).setResizable(false);
-        }
 
         txtPesquisar.setToolTipText("Digite o Titulo do livro");
 
@@ -122,7 +139,7 @@ public class Listar extends javax.swing.JFrame {
                                 .addComponent(txtPesquisar)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(btnPesquisar))
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 614, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 692, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(btnEditar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -155,7 +172,7 @@ public class Listar extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcluirActionPerformed
-        // TODO add your handling code here:
+        
     }//GEN-LAST:event_btnExcluirActionPerformed
 
     private void btnVoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVoltarActionPerformed

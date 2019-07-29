@@ -145,21 +145,7 @@ public class Livros extends ConexaoLivros {
             stmt.close();
        }
     }
-    
-    public ResultSet listar(String pesquisa) throws SQLException {
-        Livros crud = new Livros();
-        String sql = "SELECT * FROM "+ this.getTabela()+"";
-        if(!pesquisa.equals("")){
-            sql += " WHERE titulo='%"+pesquisa+"%';";
-        }
-        try (PreparedStatement stmt = crud.ConexaoLivros.prepareStatement(sql)) {
-            stmt.execute();
-            stmt.close();
-            ResultSet rs = stmt.getResultSet();
-            return rs;
-        }
-    }
-    
+        
     public void editar(Integer id, String titulo,String autor, String genero, String dataLancamento, String editora, String edicao) throws SQLException{
         this.setTabela("livros");
         this.setId(id);
@@ -168,6 +154,7 @@ public class Livros extends ConexaoLivros {
         this.setGenero(genero);
         this.setEditora(editora);
         this.setDataLancamento(dataLancamento);
+        this.setEdicao(edicao);
         
         Livros crud = new Livros();
         
@@ -196,6 +183,7 @@ public class Livros extends ConexaoLivros {
         this.setGenero(genero);
         this.setEditora(editora);
         this.setDataLancamento(dataLancamento);
+        this.setEdicao(edicao);
         
         Livros crud = new Livros();
         
