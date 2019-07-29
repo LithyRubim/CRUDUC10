@@ -128,7 +128,7 @@ public class Livros extends ConexaoLivros {
     }
     
     //pesquisa
-    public void pesquisa(String txt) throws SQLException {
+    /*public void pesquisa(String txt) throws SQLException {
         Livros crud = new Livros();
         String sql = "SELECT * FROM "+ this.tabela+" WHERE titulo LIKE ?";
         PreparedStatement stmt = crud.ConexaoLivros.prepareStatement(sql);
@@ -144,7 +144,7 @@ public class Livros extends ConexaoLivros {
             stmt.execute();
             stmt.close();
        }
-    }
+    }*/
         
     public void editar(Integer id, String titulo,String autor, String genero, String dataLancamento, String editora, String edicao) throws SQLException{
         this.setTabela("livros");
@@ -171,7 +171,7 @@ public class Livros extends ConexaoLivros {
             stmt.execute();
             stmt.close();
             
-            JOptionPane.showMessageDialog(null, "Cadastro realizado com sucesso");
+            JOptionPane.showMessageDialog(null, "Cadastro atualizado com sucesso");
         }
     }
     
@@ -200,6 +200,22 @@ public class Livros extends ConexaoLivros {
             stmt.close();
             
             JOptionPane.showMessageDialog(null, "Cadastro realizado com sucesso");
+        }
+    }
+    
+    public void excluir(int id) throws SQLException{
+        this.setId(id);
+        this.setTabela("livros");
+        
+        Livros crud = new Livros();
+        String sql = "DELETE FROM " + this.getTabela() + " WHERE id=?";
+        
+        try (PreparedStatement stmt = crud.ConexaoLivros.prepareStatement(sql)) {
+            stmt.setInt(1,this.getId());
+            stmt.execute();
+            stmt.close();
+            
+            JOptionPane.showMessageDialog(null, "Item excluido com sucesso");
         }
     }
      

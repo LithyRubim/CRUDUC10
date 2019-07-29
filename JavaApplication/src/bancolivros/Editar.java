@@ -5,6 +5,10 @@
  */
 package bancolivros;
 
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import javax.swing.JOptionPane;
+
 
 /**
  *
@@ -16,6 +20,44 @@ public class Editar extends javax.swing.JFrame {
      */
     public Editar() {
         initComponents();
+        
+    }
+    
+    public void setValorCampos(){
+        this.setVisible(true);
+        try{
+            Livros crud = new Livros();
+            
+            String sql = "SELECT * FROM "+ crud.getTabela()+"";
+           
+            try (PreparedStatement stmt = crud.ConexaoLivros.prepareStatement(sql)) {
+                stmt.execute();
+                
+                ResultSet rs = stmt.getResultSet();
+                //System.out.println(rs);
+            
+                while(rs.next()){
+                    crud.setId(Integer.parseInt(rs.getString("id")));
+                    crud.setTitulo(rs.getString("titulo"));
+                    crud.setAutor(rs.getString("autor"));
+                    crud.setGenero(rs.getString("genero"));
+                    crud.setDataLancamento(rs.getString("dataLancamento"));
+                    crud.setEditora(rs.getString("editora"));
+                    crud.setEdicao(rs.getString("edicao"));                    
+                }
+                stmt.close();
+                
+                txtId.setText(crud.getId().toString());
+                txtTitulo.setText(crud.getTitulo());
+                txtAutor.setText(crud.getAutor());
+                txtGenero.setText(crud.getGenero());
+                txtDataLancamento.setText(crud.getDataLancamento());
+                txtEditora.setText(crud.getEditora());
+                txtEdicao.setText(crud.getEdicao());
+            }
+        }catch(Exception e){
+            System.out.println(e.getMessage());
+        }
     }
 
     /**
@@ -28,7 +70,7 @@ public class Editar extends javax.swing.JFrame {
     private void initComponents() {
 
         txtDataLancamento = new javax.swing.JTextField();
-        btnEditar = new javax.swing.JButton();
+        btnAtualizar = new javax.swing.JButton();
         txtTitulo = new javax.swing.JTextField();
         btnVoltar = new javax.swing.JButton();
         txtGenero = new javax.swing.JTextField();
@@ -47,10 +89,10 @@ public class Editar extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        btnEditar.setText("Atualizar");
-        btnEditar.addActionListener(new java.awt.event.ActionListener() {
+        btnAtualizar.setText("Atualizar");
+        btnAtualizar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnEditarActionPerformed(evt);
+                btnAtualizarActionPerformed(evt);
             }
         });
 
@@ -97,7 +139,7 @@ public class Editar extends javax.swing.JFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(36, 36, 36)
-                                .addComponent(btnEditar, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(btnAtualizar, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(33, 33, 33)
                                 .addComponent(btnVoltar, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(layout.createSequentialGroup()
@@ -162,7 +204,7 @@ public class Editar extends javax.swing.JFrame {
                     .addComponent(txtEdicao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnEditar)
+                    .addComponent(btnAtualizar)
                     .addComponent(btnVoltar))
                 .addGap(22, 22, 22))
         );
@@ -170,7 +212,7 @@ public class Editar extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarActionPerformed
+    private void btnAtualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAtualizarActionPerformed
         try{
             Livros crud = new Livros();
 
@@ -178,10 +220,11 @@ public class Editar extends javax.swing.JFrame {
         }catch(Exception e){
             System.out.println(e.getMessage());
         }
-    }//GEN-LAST:event_btnEditarActionPerformed
+    }//GEN-LAST:event_btnAtualizarActionPerformed
 
     private void btnVoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVoltarActionPerformed
         this.dispose();
+        new Listar().setVisible(true);
     }//GEN-LAST:event_btnVoltarActionPerformed
 
     private void txtAutorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtAutorActionPerformed
@@ -224,7 +267,7 @@ public class Editar extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnEditar;
+    private javax.swing.JButton btnAtualizar;
     private javax.swing.JButton btnVoltar;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel lblAutor;

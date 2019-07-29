@@ -9,6 +9,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.HashSet;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -25,7 +26,7 @@ public class Listar extends javax.swing.JFrame {
         try{
             Livros crud = new Livros();
 
-            javax.swing.table.DefaultTableModel tbModel = (DefaultTableModel)tbListagem.getModel();
+            DefaultTableModel tbModel = (DefaultTableModel)tbListagem.getModel();
             
             String sql = "SELECT * FROM "+ crud.getTabela()+"";
            
@@ -42,19 +43,14 @@ public class Listar extends javax.swing.JFrame {
                     crud.setGenero(rs.getString("genero"));
                     crud.setDataLancamento(rs.getString("dataLancamento"));
                     crud.setEditora(rs.getString("editora"));
-                    crud.setEdicao(rs.getString("edicao"));
-                    
+                    crud.setEdicao(rs.getString("edicao"));                    
                     
                     tbModel.addRow(new Object[]{crud.getId(),crud.getTitulo(),crud.getAutor(),crud.getGenero(),crud.getDataLancamento(),crud.getEditora(),crud.getEdicao()});
-                    /*rs.getString("titulo");
-                    rs.getString("autor");
-                    rs.getString("genero");
-                    /*stmt.execute();
-                    stmt.close();*/
                 }
                 
                 stmt.close();
             }
+            
             
             
         }catch(Exception e){
@@ -83,6 +79,11 @@ public class Listar extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         btnEditar.setText("Editar");
+        btnEditar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEditarActionPerformed(evt);
+            }
+        });
 
         btnExcluir.setText("Excluir");
         btnExcluir.addActionListener(new java.awt.event.ActionListener() {
@@ -172,12 +173,32 @@ public class Listar extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcluirActionPerformed
-        
+        try{
+            Livros crud = new Livros();
+            
+            int idLivro = Integer.parseInt(tbListagem.getValueAt(tbListagem.getSelectedRow(), 0).toString());
+            
+            int escolha = JOptionPane.showConfirmDialog(null, "Deseja excluir o registro selecionado?", "Confirmar exclusão", JOptionPane.YES_NO_OPTION);
+                        
+            DefaultTableModel tbModel = (DefaultTableModel)tbListagem.getModel();
+            
+            if(escolha == 0){
+                crud.excluir(idLivro);
+                tbModel.removeRow(tbListagem.getSelectedRow());
+            }
+        }catch(Exception e){
+            System.out.println(e.getMessage());
+        }
     }//GEN-LAST:event_btnExcluirActionPerformed
 
     private void btnVoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVoltarActionPerformed
         this.dispose();
     }//GEN-LAST:event_btnVoltarActionPerformed
+
+    private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarActionPerformed
+        new Editar().setValorCampos();
+        this.dispose();
+    }//GEN-LAST:event_btnEditarActionPerformed
 
     /**
      * @param args the command line arguments
