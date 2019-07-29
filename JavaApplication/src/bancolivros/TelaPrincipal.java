@@ -130,7 +130,8 @@ public class TelaPrincipal extends javax.swing.JFrame {
         JOptionPane.showMessageDialog(null, 
               "Programa de CRUD \n"
                + "TÉCNICO EM INFORMÁTICA \n"
-               + " SENAC - 2019", 
+               + " SENAC - 2019 \n"
+               + " Alice Abreu Rubim Dias\n", 
               "Sobre o CRUD", JOptionPane.PLAIN_MESSAGE); 
     }//GEN-LAST:event_jmiSobreActionPerformed
 
