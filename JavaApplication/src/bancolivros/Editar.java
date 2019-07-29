@@ -217,6 +217,8 @@ public class Editar extends javax.swing.JFrame {
             Livros crud = new Livros();
 
             crud.editar(Integer.parseInt(txtId.getText()), txtTitulo.getText(), txtAutor.getText(), txtGenero.getText(), txtDataLancamento.getText(), txtEditora.getText(), txtEdicao.getText());
+            this.dispose();
+        new Listar().setVisible(true);
         }catch(Exception e){
             System.out.println(e.getMessage());
         }
