@@ -158,6 +158,7 @@ public class Cadastrar extends javax.swing.JFrame {
             Livros crud = new Livros();
         
             crud.cadastrar(txtTitulo.getText(), txtAutor.getText(), txtGenero.getText(), txtDataLancamento.getText(), txtEditora.getText(), txtEdicao.getText());
+            this.dispose();
         }catch(Exception e){
             System.out.println(e.getMessage());
         }

@@ -120,14 +120,18 @@ public class TelaPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_btnFormCadastroActionPerformed
 
     private void jmiSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiSairActionPerformed
-        this.dispose();
+        int escolha = JOptionPane.showConfirmDialog(null, "Tem certeza que deseja sair do sistema?", "Confirmar saída", JOptionPane.YES_NO_OPTION);
+        if(escolha == 0){
+            this.dispose();
+        }
     }//GEN-LAST:event_jmiSairActionPerformed
 
     private void jmiSobreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiSobreActionPerformed
         JOptionPane.showMessageDialog(null, 
               "Programa de CRUD \n"
                + "TÉCNICO EM INFORMÁTICA \n"
-               + " SENAC - 2019", 
+               + " SENAC - 2019 \n"
+               + " Alice Abreu Rubim Dias\n", 
               "Sobre o CRUD", JOptionPane.PLAIN_MESSAGE); 
     }//GEN-LAST:event_jmiSobreActionPerformed
 

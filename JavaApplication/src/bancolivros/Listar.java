@@ -116,6 +116,11 @@ public class Listar extends javax.swing.JFrame {
         jLabel1.setText("Listagem");
 
         btnPesquisar.setText("Pesquisar");
+        btnPesquisar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnPesquisarActionPerformed(evt);
+            }
+        });
 
         btnVoltar.setText("Voltar");
         btnVoltar.addActionListener(new java.awt.event.ActionListener() {
@@ -196,9 +201,44 @@ public class Listar extends javax.swing.JFrame {
     }//GEN-LAST:event_btnVoltarActionPerformed
 
     private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarActionPerformed
-        new Editar().setValorCampos();
+        int idLivro = Integer.parseInt(tbListagem.getValueAt(tbListagem.getSelectedRow(), 0).toString());
+        new Editar().setValorCampos(idLivro);
         this.dispose();
     }//GEN-LAST:event_btnEditarActionPerformed
+
+    private void btnPesquisarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPesquisarActionPerformed
+        try{
+            Livros crud = new Livros();
+
+            DefaultTableModel tbModel = (DefaultTableModel)tbListagem.getModel();
+            
+            tbModel.setRowCount(0);
+            
+            String sql = "SELECT * FROM "+ crud.getTabela()+" WHERE titulo LIKE '%"+txtPesquisar.getText()+"%'";
+           
+            try (PreparedStatement stmt = crud.ConexaoLivros.prepareStatement(sql)) {
+                stmt.execute();
+                
+                ResultSet rs = stmt.getResultSet();
+            
+                while(rs.next()){
+                    crud.setId(Integer.parseInt(rs.getString("id")));
+                    crud.setTitulo(rs.getString("titulo"));
+                    crud.setAutor(rs.getString("autor"));
+                    crud.setGenero(rs.getString("genero"));
+                    crud.setDataLancamento(rs.getString("dataLancamento"));
+                    crud.setEditora(rs.getString("editora"));
+                    crud.setEdicao(rs.getString("edicao"));                    
+                    
+                    tbModel.addRow(new Object[]{crud.getId(),crud.getTitulo(),crud.getAutor(),crud.getGenero(),crud.getDataLancamento(),crud.getEditora(),crud.getEdicao()});
+                }
+                
+                stmt.close();
+            }
+        }catch(Exception e){
+            System.out.println(e.getMessage());
+        }
+    }//GEN-LAST:event_btnPesquisarActionPerformed
 
     /**
      * @param args the command line arguments
